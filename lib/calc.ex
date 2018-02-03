@@ -71,7 +71,9 @@ defmodule Calc do
       if op == "*" || op == "/" do
         {List.delete(op_stack, op), output ++ [op]}
       else
-        result pop_ops(List.delete(op_stack, next_elem), output, op)
+        result = pop_ops(List.delete(op_stack, next_elem), output, op)
+        op_stack = elem(result, 0)
+        output = elem(result, 1)
         {op_stack ++ [next_elem], output}
       end
     end
