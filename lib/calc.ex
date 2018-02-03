@@ -108,9 +108,9 @@ defmodule Calc do
     cond do
       next_elem == "+" ->
         result = get_two_elem(stack)
-        num1 = result[num2]
-        num2 = result[num2]
-        stack = result[stack]
+        num1 = result[:num2]
+        num2 = result[:num2]
+        stack = result[:stack]
         IO.puts("Num 1 and 2")
         IO.inspect(num1)
         IO.inspect(num2)
