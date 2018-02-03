@@ -66,16 +66,18 @@ defmodule Calc do
   end
 
   def pop_ops(op_stack, output, op) do
-    if Kernel.length(op_stack) == 0 do
-      next_elem = List.last(op_stack)
+    if Kernel.length(op_stack) >= 0 do
       if op == "*" || op == "/" do
-        {List.delete(op_stack, op), output ++ [op]}
+        {op_stack ++ [op], output}
       else
+        next_elem = List.last(op_stack)
         result = pop_ops(List.delete(op_stack, next_elem), output, op)
         op_stack = elem(result, 0)
         output = elem(result, 1)
         {op_stack ++ [next_elem], output}
       end
+    else
+      {op_stack ++ [op], output]}
     end
   end
 
