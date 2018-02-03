@@ -65,9 +65,9 @@ defmodule Calc do
     if List.last(op_stack) != "(" do
       op = List.last(op_stack)
       num2 = List.last(num_stack)
-      List.delete(num_stack, num2)
+      num_stack = List.delete(num_stack, num2)
       num1 = List.last(num_stack)
-      List.delete(num_stack, num1)
+      num_stack = List.delete(num_stack, num1)
 
       IO.puts("adding at end")
       IO.inspect(num_stack)
@@ -89,9 +89,9 @@ defmodule Calc do
 
     if next_op == "*" || next_op == "/" do
       num2 = List.last(num_stack)
-      List.delete(num_stack, num2)
+      num_stack = List.delete(num_stack, num2)
       num1 = List.last(num_stack)
-      List.delete(num_stack, num1)
+      num_stack = List.delete(num_stack, num1)
       pop_ops(List.delete(op_stack, next_op), num_stack ++ [op, num1, num2])
     else
       {op_stack ++ [op], num_stack}
