@@ -54,21 +54,21 @@ defmodule Calc do
   @doc """
   Will evaluate a basic arithmetic expression for the final element
   """
-  def turn_to_prefix(array, index, stack) when index + 1 == Kernel.length(array) do
+  def turn_to_prefix(array, index, stack) when index + 1 == Kernel.length(prefix_array) do
     stack ++ [elem(Float.parse(Enum.at(array, index)), 0)]
   end
 
   @doc """
   Will evaluate a basic arithmetic expression for no elements
   """
-  def turn_to_prefix(array, index, stack) when index == Kernel.length(array) do
+  def turn_to_prefix(array, index, stack) when index == Kernel.length(prefix_array) do
     stack
   end
 
   @doc """
   Will evaluate a basic arithmetic expression, calculating all * and / expressions
   """
-  def mult_and_div(prefix_array, index, stack) when index + 1 < Kernel.length(array) do
+  def mult_and_div(prefix_array, index, stack) when index + 1 < Kernel.length(prefix_array) do
     IO.inspect(prefix_array)
     next_elem = Enum.at(prefix_array, index)
     stack =
