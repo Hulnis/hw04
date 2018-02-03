@@ -35,7 +35,7 @@ defmodule Calc do
     IO.inspect(output)
     IO.puts("-----------")
     if next_elem == "(" do
-      turn_to_prefix(array, index + 1, stack ++ ["("], output)
+      turn_to_prefix(array, index + 1, op_stack ++ ["("], output)
     end
     if next_elem == ")" do
       result = match_paranths(op_stack, output)
@@ -77,12 +77,12 @@ defmodule Calc do
     end
   end
 
-  def empty_stack(stack, index, output) when index < Kernel.length(array) do
+  def empty_stack(stack, index, output) when index < Kernel.length(stack) do
     next_elem = List.last(stack)
     empty_stack(List.delete(next_elem), index + 1, output ++ [next_elem])
   end
 
-  def empty_stack(stack, index, output) when index >= Kernel.length(array) do
+  def empty_stack(stack, index, output) when index >= Kernel.length(stack) do
     output
   end
 end
