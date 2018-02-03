@@ -34,20 +34,19 @@ defmodule Calc do
     IO.inspect(op_stack)
     IO.inspect(output)
     IO.puts("-----------")
-    if next_elem == "(" do
-      turn_to_postfix(array, index + 1, op_stack ++ ["("], output)
-    end
-    else if next_elem == ")" do
-      result = match_paranths(op_stack, output)
-      IO.puts("after )")
-      IO.inspect(result)
-      turn_to_postfix(array, index + 1, elem(result, 0), elem(result, 1))
-    end
-    else if next_elem == "+" || next_elem == "-" || next_elem == "*" || next_elem == "/" do
-      result = pop_ops(op_stack, output, next_elem)
-      turn_to_postfix(array, index + 1, elem(result, 0), elem(result, 1))
-    else
-      turn_to_postfix(array, index + 1, op_stack, output ++ [next_elem])
+    cond do
+      next_elem == "(" ->
+        turn_to_postfix(array, index + 1, op_stack ++ ["("], output)
+      next_elem == ")" ->
+        result = match_paranths(op_stack, output)
+        IO.puts("after )")
+        IO.inspect(result)
+        turn_to_postfix(array, index + 1, elem(result, 0), elem(result, 1))
+      next_elem == "+" || next_elem == "-" || next_elem == "*" || next_elem == "/" ->
+        result = pop_ops(op_stack, output, next_elem)
+        turn_to_postfix(array, index + 1, elem(result, 0), elem(result, 1))
+      true
+        turn_to_postfix(array, index + 1, op_stack, output ++ [next_elem])
     end
   end
 
