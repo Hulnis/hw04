@@ -4,15 +4,21 @@ defmodule Calc do
   """
 
   @doc """
-  Hello world.
-
-  ## Examples
-
-      iex> Calc.hello
-      :world
-
+  Repeatedly prints a prompt and reads input, sends to eval
   """
-  def hello do
-    :world
+  def main do
+    input = IO.gets("Input your expression to be evaluated: ")
+    IO.puts(basic_eval(input))
+    main()
+  end
+
+  @doc """
+  Will evaluate a basic arithmetic expression, no parantheses
+  """
+  def basic_eval(line) do
+    line
+    | String.trim()
+    | String.split()
+    | IO.puts()
   end
 end
