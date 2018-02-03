@@ -16,7 +16,7 @@ defmodule Calc do
   parse through input once paranths have been dealt with, turning into ast using loop_over_array
   """
   def parse_input(input) do
-    ast = line
+    ast = input
     |> String.trim()
     |> String.split()
     |> loop_over_array(0)
