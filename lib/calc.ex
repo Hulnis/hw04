@@ -13,14 +13,15 @@ defmodule Calc do
   end
 
   @doc """
-  parse through input once paranths have been dealt with, turning into prefix list using loop_over_array
+  parse through input once paranths have been dealt with, turning into prefix list using turn_to_prefix
   """
   def parse_input(input) do
     stack = []
     pre = input
     |> String.trim()
     |> String.split()
-    |> loop_over_array(0, stack)
+    |> turn_to_prefix(0, stack)
+    |> basic_eval()
 
     IO.inspect(pre)
   end
@@ -29,27 +30,20 @@ defmodule Calc do
   Loops over array, creating a ternary structure of op, left, and right
   1 + 2 * 3 + 4
   """
-  def loop_over_array(array, index, stack) when index + 1 < Kernel.length(array) do
+  def turn_to_prefix(array, index, stack) when index + 1 < Kernel.length(array) do
     op = Enum.at(array, index + 1)
-    IO.inspect(array)
-    IO.puts(op)
-    IO.inspect(index)
-    IO.inspect(Kernel.length(array))
-    IO.inspect(stack)
     stack =
       case op do
         "+" -> stack ++ ["+", elem(Float.parse(Enum.at(array, index)), 0)]
         "-" -> stack ++ ["-", elem(Float.parse(Enum.at(array, index)), 0)]
         "*" -> stack ++ ["*", elem(Float.parse(Enum.at(array, index)), 0)]
-        "/" -> stack ++ ["/", elem(Float.parse(Enum.at(array, index + 1)), 0), elem(Float.parse(Enum.at(array, index + 2)), 0)]
+        "/" -> stack ++ ["/", elem(Float.parse(Enum.at(array, index)), 0)]
         _ -> "Error in the case"
       end
-    IO.puts("made it out of case")
-    IO.inspect(stack)
-    loop_over_array(array, index + 2, stack)
+    turn_to_prefix(array, index + 2, stack)
   end
 
-  def loop_over_array(array, index, stack) when index + 1 >= Kernel.length(array) do
+  def turn_to_prefix(array, index, stack) when index + 1 >= Kernel.length(array) do
     IO.puts("end case")
     IO.inspect(stack)
     stack ++ [elem(Float.parse(Enum.at(array, index)), 0)]
@@ -58,16 +52,10 @@ defmodule Calc do
   @doc """
   Will evaluate a basic arithmetic expression, no parantheses
   """
-  def basic_eval(line) do
-    array = line
-    |> String.trim()
-    |> String.split()
+  def basic_eval(prefix_array) do
+    IO.inspect(prefix_array)
 
-    IO.inspect(array, label: "List is: ")
-    num1 = elem(Float.parse(Enum.at(array, 0)), 0)
-    num2 = elem(Float.parse(Enum.at(array, 2)), 0)
-    op = Enum.at(array, 1)
-    IO.puts(basic_math(num1, num2, op))
+    
   end
 
 
