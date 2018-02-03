@@ -57,7 +57,7 @@ defmodule Calc do
     IO.puts("emptying stack")
     IO.inspect(op_stack)
     IO.inspect(output)
-    empty_stack(op_stack, 0, output)
+    empty_stack(op_stack, output)
   end
 
   def match_paranths(op_stack, output) do
@@ -84,11 +84,11 @@ defmodule Calc do
     end
   end
 
-  def empty_stack(stack, index, output) when index < Kernel.length(stack) do
-    next_elem = Enum.at(stack, index)
+  def empty_stack(stack, output) when Kernel.length(stack) > 0do
+    next_elem = List.last(stack)
     IO.puts("adding to output")
     IO.inspect(next_elem)
-    empty_stack(stack, index + 1, output ++ [next_elem])
+    empty_stack(List.delete(stack, next_elem), output ++ [next_elem])
   end
 
   def empty_stack(stack, index, output) when index >= Kernel.length(stack) do
