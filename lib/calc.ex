@@ -8,8 +8,32 @@ defmodule Calc do
   """
   def main do
     input = IO.gets("Input your expression to be evaluated: ")
-    IO.puts(basic_eval(input))
+    IO.puts(parse_input(input))
     main()
+  end
+
+  @doc """
+  parse through input once paranths have been dealt with, turning into ast using loop_over_array
+  """
+  def parse_input(input) do
+    ast = line
+    |> String.trim()
+    |> String.split()
+    |> loop_over_array(0)
+
+    IO.inspect(ast)
+  end
+
+  @doc """
+  Loops over array, creating a ternary structure of op, left, and right
+  1 + 2 + 3 + 4
+  """
+  def loop_over_array(array, index) when index + 1 < Kernel.length(array) do
+    %{"op" => Enum.at(array, index + 1), "left" => elem(Float.parse(Enum.at(array, index)), 0), "right" => loop_over_array(array, index + 2)}
+  end
+
+  def loop_over_array(array, index) when index + 1 == Kernel.length(array) do
+    elem(Float.parse(Enum.at(array, index)), 0)
   end
 
   @doc """
@@ -26,6 +50,8 @@ defmodule Calc do
     op = Enum.at(array, 1)
     IO.puts(basic_math(num1, num2, op))
   end
+
+
 
   @doc """
   Does one math operation
