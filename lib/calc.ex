@@ -84,7 +84,7 @@ defmodule Calc do
       num1 = List.last(num_stack)
       pop_ops(op_stack.delete(next_op), num_stack.delete(num2).delete(num1) ++ [op, num1, num2])
     else
-      {op_stack ++ [next_op], num_stack}
+      {op_stack ++ [op], num_stack}
     end
   end
   @doc """
