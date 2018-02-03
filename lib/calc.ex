@@ -19,10 +19,5 @@ defmodule Calc do
     line
     |> String.trim()
     |> String.split()
-    |> IO.puts()
-  end
-
-  def print do
-    IO.puts("please help")
   end
 end
