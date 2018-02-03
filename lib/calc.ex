@@ -91,7 +91,7 @@ defmodule Calc do
     empty_stack(List.delete(stack, next_elem), output ++ [next_elem])
   end
 
-  def empty_stack(stack, index, output) when Kernel.length(stack) == 0 do
+  def empty_stack(stack, output) when Kernel.length(stack) == 0 do
     output
   end
 end
