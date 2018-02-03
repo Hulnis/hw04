@@ -49,7 +49,7 @@ defmodule Calc do
         result = pop_ops(op_stack, output, next_elem)
         turn_to_postfix(array, index + 1, elem(result, 0), elem(result, 1))
       true ->
-        turn_to_postfix(array, index + 1, op_stack, output ++ [next_elem])
+        turn_to_postfix(array, index + 1, op_stack, output ++ [elem(Float.parse(next_elem), 0)])
     end
   end
 
@@ -145,10 +145,8 @@ defmodule Calc do
   def get_two_elem(stack) do
     num2 = List.last(stack)
     stack = List.delete(stack, num2)
-    num2 = elem(Float.parse(num2), 0)
     num1 = List.last(stack)
     stack = List.delete(stack, num1)
-    num1 = elem(Float.parse(num1), 0)
     %{:num1 => num1, :num2 => num2, :stack => stack}
   end
 end
