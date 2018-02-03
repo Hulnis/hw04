@@ -27,7 +27,7 @@ defmodule Calc do
 
   @doc """
   Loops over array, creating a ternary structure of op, left, and right
-  1 + 2 * 3 +4
+  1 + 2 * 3 + 4
   """
   def loop_over_array(array, index, stack) when index + 1 < Kernel.length(array) do
     op = Enum.at(array, index + 1)
@@ -40,10 +40,12 @@ defmodule Calc do
       case op do
         "+" -> stack ++ ["+", elem(Float.parse(Enum.at(array, index)), 0)]
         "-" -> stack ++ ["-", elem(Float.parse(Enum.at(array, index)), 0)]
-        "*" -> stack ++ ["*", elem(Float.parse(Enum.at(array, index + 1)), 0)]
+        "*" -> stack ++ ["*", elem(Float.parse(Enum.at(array, index)), 0)]
         "/" -> stack ++ ["/", elem(Float.parse(Enum.at(array, index + 1)), 0), elem(Float.parse(Enum.at(array, index + 2)), 0)]
-        _ -> "Error"
+        _ -> "Error in the case"
       end
+    IO.puts("made it out of case")
+    IO.inspect(stack)
     loop_over_array(array, index + 2, stack)
   end
 
