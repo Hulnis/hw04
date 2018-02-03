@@ -107,12 +107,7 @@ defmodule Calc do
     next_elem = Enum.at(postfix, index)
     cond do
       next_elem == "+" ->
-        num2 = List.last(stack))
-        stack = List.delete(stack, num2)
-        num2 = elem(Float.parse(num2, 0)
-        num1 = List.last(stack))
-        stack = List.delete(stack, num1)
-        num1 = elem(Float.parse(num1, 0)
+        {num1, num2} = get_two_elem(stack)
         IO.puts("Num 1 and 2")
         IO.inspect(num1)
         IO.inspect(num2)
@@ -134,12 +129,7 @@ defmodule Calc do
         num1 = elem(Float.parse(num1, 0)
         eval_postfix(postfix, stack ++ [num1 * num2], index + 1)
       next_elem == "/" ->
-        num2 = List.last(stack))
-        stack = List.delete(stack, num2)
-        num2 = elem(Float.parse(num2, 0)
-        num1 = List.last(stack))
-        stack = List.delete(stack, num1)
-        num1 = elem(Float.parse(num1, 0)
+
         eval_postfix(postfix, stack ++ [num1 / num2], index + 1)
       true ->
         IO.puts("adding to stack")
@@ -147,6 +137,16 @@ defmodule Calc do
         IO.puts("------")
         eval_postfix(postfix, stack ++ [next_elem], index + 1)
     end
+  end
+
+  def get_two_elem(stack) do
+    num2 = List.last(stack))
+    stack = List.delete(stack, num2)
+    num2 = elem(Float.parse(num2, 0)
+    num1 = List.last(stack))
+    stack = List.delete(stack, num1)
+    num1 = elem(Float.parse(num1, 0)
+    {num1, num2}
   end
 
   def eval_postfix(postfix, stack, index) when index >= Kernel.length(postfix) do
