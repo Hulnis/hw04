@@ -155,6 +155,6 @@ defmodule Calc do
     num1 = List.last(stack)
     stack = List.delete(stack, num1)
     num1 = elem(Float.parse(num1, 0))
-    {num1, num2}
+    {num1, num2, stack}
   end
 end
