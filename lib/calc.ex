@@ -80,7 +80,7 @@ defmodule Calc do
         _ -> "Error in the index case"
       end
     index =
-      case op do
+      case next_elem do
         "+" -> index + 1
         "-" -> index + 1
         "*" -> index + 3
