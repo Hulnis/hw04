@@ -34,6 +34,7 @@ defmodule Calc do
     IO.inspect(next_elem)
     IO.inspect(op_stack)
     IO.inspect(num_stack)
+    IO.puts("-----------")
     if next_elem == "(" do
       turn_to_prefix(array, index + 1, op_stack ++ ["("], num_stack)
     end
@@ -45,7 +46,7 @@ defmodule Calc do
       result = pop_ops(op_stack, num_stack, next_elem)
       turn_to_prefix(array, index + 1, elem(result, 0), elem(result, 1))
     else
-      turn_to_prefix(array, index + 1, num_stack ++ [next_elem], op_stack)
+      turn_to_prefix(array, index + 1, op_stack, num_stack ++ [next_elem])
     end
   end
 
