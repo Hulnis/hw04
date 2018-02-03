@@ -22,7 +22,7 @@ defmodule Calc do
     | IO.puts()
   end
 
-  def print(basic) do
+  def print do
     IO.puts("please help")
   end
 end
