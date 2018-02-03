@@ -71,27 +71,22 @@ defmodule Calc do
   def mult_and_div(prefix_array, index, stack) when index + 1 < Kernel.length(prefix_array) do
     IO.inspect(prefix_array)
     next_elem = Enum.at(prefix_array, index)
-    if is_float(next_elem) do
-      stack = stack ++ [next_elem]
-      index = index + 1
-    else
-      stack =
-        case next_elem do
-          "+" -> stack ++ ["+"]
-          "-" -> index ++ ["-"]
-          "*" -> stack ++ [Enum.at(prefix_array, index + 1) * Enum.at(prefix_array, index + 2)]
-          "/" -> stack ++ [Enum.at(prefix_array, index + 1) / Enum.at(prefix_array, index + 2)]
-          _ -> "Error in the index case"
-        end
-      index =
-        case next_elem do
-          "+" -> index + 1
-          "-" -> index + 1
-          "*" -> index + 3
-          "/" -> index + 3
-          _ -> "Error in the index case"
-        end
-    end
+    stack =
+      case next_elem do
+        "+" -> stack ++ ["+"]
+        "-" -> index ++ ["-"]
+        "*" -> stack ++ [Enum.at(prefix_array, index + 1) * Enum.at(prefix_array, index + 2)]
+        "/" -> stack ++ [Enum.at(prefix_array, index + 1) / Enum.at(prefix_array, index + 2)]
+        _ -> stack ++ [next_elem]
+      end
+    index =
+      case next_elem do
+        "+" -> index + 1
+        "-" -> index + 1
+        "*" -> index + 3
+        "/" -> index + 3
+        _ -> index + 1
+      end
     mult_and_div(prefix_array, index, stack)
   end
 
