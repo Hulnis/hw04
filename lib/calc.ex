@@ -21,7 +21,7 @@ defmodule Calc do
     |> String.trim()
     |> String.split()
     |> turn_to_prefix(0, stack)
-    |> basic_eval(0)
+    |> mult_and_div(0)
 
     IO.inspect(pre)
   end
@@ -66,34 +66,41 @@ defmodule Calc do
   end
 
   @doc """
-  Will evaluate a basic arithmetic expression, no parantheses
+  Will evaluate a basic arithmetic expression, calculating all * and / expressions
   """
-  def basic_eval(prefix_array, index) do
+  def mult_and_div(prefix_array, index, stack) when index + 1 < Kernel.length(array) do
     IO.inspect(prefix_array)
     next_elem = Enum.at(prefix_array, index)
-    case next_elem do
-      "+" -> index + 2
-      "-" -> index + 2
-      "*" -> Enum.at(prefix_array, index + 1) * Enum.at(prefix_array, index + 2)
-      "/" -> Enum.at(prefix_array, index + 1) / Enum.at(prefix_array, index + 2)
-      _ -> "Error in the index case"
-    end
+    stack =
+      case next_elem do
+        "+" -> stack ++ ["+"]
+        "-" -> index ++ ["-"]
+        "*" -> stack ++ [Enum.at(prefix_array, index + 1) * Enum.at(prefix_array, index + 2)]
+        "/" -> stack ++ [Enum.at(prefix_array, index + 1) / Enum.at(prefix_array, index + 2)]
+        _ -> "Error in the index case"
+      end
+    index =
+      case op do
+        "+" -> index + 1
+        "-" -> index + 1
+        "*" -> index + 3
+        "/" -> index + 3
+        _ -> "Error in the index case"
+      end
+    mult_and_div(prefix_array, index, stack)
   end
 
-
+  @doc """
+  Will evaluate a basic arithmetic expression, calculating all * and / expressions for the final element
+  """
+  def mult_and_div(array, index, stack) when index + 1 == Kernel.length(array) do
+    stack ++ [elem(Float.parse(Enum.at(array, index)), 0)]
+  end
 
   @doc """
-  Does one math operation
+  Will evaluate a basic arithmetic expression, calculating all * and / expressions for no elements
   """
-  def basic_math(num1, num2, op) do
-    IO.inspect(num1)
-    IO.inspect(num2)
-    case op do
-      "+" -> num1 + num2
-      "-" -> num1 - num2
-      "/" -> num1 / num2
-      "*" -> num1 * num2
-      _ -> "Error"
-    end
+  def mult_and_div(array, index, stack) when index == Kernel.length(array) do
+    stack
   end
 end
