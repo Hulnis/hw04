@@ -111,6 +111,8 @@ defmodule Calc do
         stack = List.delete(stack, num2)
         num1 = List.last(stack)
         stack = List.delete(stack, num1)
+        IO.puts("Num 1 and 2")
+        IO.inspect(num1, num2)
         eval_postfix(postfix, stack ++ [num1 + num2], index + 1)
       next_elem == "-" ->
         num2 = List.last(stack)
@@ -131,6 +133,9 @@ defmodule Calc do
         stack = List.delete(stack, num1)
         eval_postfix(postfix, stack ++ [num1 / num2], index + 1)
       true ->
+        IO.puts("adding to stack")
+        IO.inspect(next_elem)
+        IO.puts("------")
         eval_postfix(postfix, stack ++ [next_elem], index + 1)
     end
   end
