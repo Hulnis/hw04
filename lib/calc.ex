@@ -17,9 +17,9 @@ defmodule Calc do
   """
   def basic_eval(line) do
     line
-    | String.trim()
-    | String.split()
-    | IO.puts()
+    |> String.trim()
+    |> String.split()
+    |> IO.puts()
   end
 
   def print do
