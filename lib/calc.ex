@@ -21,6 +21,10 @@ defmodule Calc do
     |> String.split()
 
     IO.inspect(array, label: "List is: ")
+    num1 = FLoat.parse(Enums.at(array, 0))
+    num2 = FLoat.parse(Enums.at(array, 2))
+    op = Enums.at(array, 1)
+    IO.puts(basic_math(num1, num2, op))
   end
 
   @doc """
