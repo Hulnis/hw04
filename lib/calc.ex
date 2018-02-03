@@ -66,6 +66,11 @@ defmodule Calc do
       op = List.last(op_stack)
       num2 = List.last(num_stack)
       num1 = List.last(num_stack)
+      IO.puts("num1")
+      IO.inspect(num1)
+      IO.puts("num2")
+      IO.inspect(num2)
+      IO.inspect(num_stack)
       match_paranths(op_stack.delete(op), List.delete(List.delete(num_stack, num2), num1) ++ [op, num1, num2])
     else
       op_stack = op_stack.delete(List.last(op_stack))
