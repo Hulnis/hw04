@@ -31,6 +31,8 @@ defmodule Calc do
   """
   def loop_over_array(array, index, stack) when index + 1 < Kernel.length(array) do
     op = Enum.at(array, index + 1)
+    IO.inspect(array)
+    IO.puts(op)
     stack =
       case op do
         "+" -> stack ++ ["+", elem(Float.parse(Enum.at(array, index)), 0)]
