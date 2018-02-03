@@ -12,11 +12,11 @@ defmodule CalcTest do
   end
 
   test "turn to postfix" do
-    assert Calc.turn_to_postfix("1 + 2", 0, [], []) == [1, 2, "+"]
-    assert Calc.turn_to_postfix("1 - 2", 0, [], []) == [1, 2, "-"]
-    assert Calc.turn_to_postfix("1 * 2", 0, [], []) == [1, 2, "*"]
-    assert Calc.turn_to_postfix("1 / 2", 0, [], []) == [1, 2, "/"]
-    assert Calc.turn_to_postfix("1 + 2 * 3", 0, [], []) == [1, 2, 3, "*", "+"]
-    assert Calc.turn_to_postfix("(1 + 2) * 3", 0, [], []) == [1, 2, 3, "+", "*"]
+    assert Calc.turn_to_postfix([1, "+", 2], 0, [], []) == [1, 2, "+"]
+    assert Calc.turn_to_postfix([1, "-", 2], 0, [], []) == [1, 2, "-"]
+    assert Calc.turn_to_postfix([1, "*", 2], 0, [], []) == [1, 2, "*"]
+    assert Calc.turn_to_postfix([1, "/", 2], 0, [], []) == [1, 2, "/"]
+    assert Calc.turn_to_postfix([1, "+", 2, "*", 3], 0, [], []) == [1, 2, 3, "*", "+"]
+    assert Calc.turn_to_postfix(["(", 1, "+", 2, ")", "*", 3], 0, [], []) == [1, 2, 3, "+", "*"]
   end
 end
