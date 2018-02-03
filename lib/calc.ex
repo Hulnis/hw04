@@ -47,7 +47,9 @@ defmodule Calc do
     loop_over_array(array, index + 2, stack)
   end
 
-  def loop_over_array(array, index, stack) when index + 1 == Kernel.length(array) do
+  def loop_over_array(array, index, stack) when index + 1 >= Kernel.length(array) do
+    IO.puts("end case")
+    IO.inspect(stack)
     stack ++ [elem(Float.parse(Enum.at(array, index)), 0)]
   end
 
