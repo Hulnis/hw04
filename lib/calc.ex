@@ -22,6 +22,7 @@ defmodule Calc do
     |> String.replace(")", " ) ")
     |> String.split(" ",  trim: true)
     |> turn_to_postfix(0, [], [])
+    |> eval_postfix([], 0)
 
     IO.inspect(post)
   end
@@ -100,5 +101,41 @@ defmodule Calc do
     IO.puts("base case")
     IO.inspect(output)
     output
+  end
+
+  def eval_postfix(postfix, stack, index) when index < Kernel.length(postfix) do
+    next_elem = Enum.at(postfix, index)
+    cond do
+      next_elem == "+" ->
+        num2 = List.last(stack)
+        stack = List.delete(stack, num2)
+        num1 = List.last(stack)
+        stack = List.delete(stack, num1)
+        eval_postfix(postfix, stack ++ [num1 + num2], index + 1)
+      next_elem == "-" ->
+        num2 = List.last(stack)
+        stack = List.delete(stack, num2)
+        num1 = List.last(stack)
+        stack = List.delete(stack, num1)
+        eval_postfix(postfix, stack ++ [num1 - num2], index + 1)
+      next_elem == "*" ->
+        num2 = List.last(stack)
+        stack = List.delete(stack, num2)
+        num1 = List.last(stack)
+        stack = List.delete(stack, num1)
+        eval_postfix(postfix, stack ++ [num1 * num2], index + 1)
+      next_elem == "/" ->
+        num2 = List.last(stack)
+        stack = List.delete(stack, num2)
+        num1 = List.last(stack)
+        stack = List.delete(stack, num1)
+        eval_postfix(postfix, stack ++ [num1 / num2], index + 1)
+      true ->
+        eval_postfix(postfix, stack ++ [next_elem], index + 1)
+    end
+  end
+
+  def eval_postfix(postfix, stack, index) when index < Kernel.length(postfix) do
+    Enum.at(stack, 0)
   end
 end
