@@ -67,6 +67,7 @@ defmodule Calc do
     if next_elem != "(" do
       match_paranths(List.delete(op_stack, next_elem), output ++ [next_elem])
     end
+      IO.puts("leaving match")
       {List.delete(op_stack, next_elem), output}
   end
 
