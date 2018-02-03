@@ -37,7 +37,7 @@ defmodule Calc do
       "/" -> stack ++ ["*", elem(Float.parse(Enum.at(array, index + 1)), 0), elem(Float.parse(Enum.at(array, index + 2)), 0)]
       "*" -> stack ++ ["/", elem(Float.parse(Enum.at(array, index + 1)), 0), elem(Float.parse(Enum.at(array, index + 2)), 0)]
       _ -> "Error"
-
+    end
     loop_over_array(array, index + 2, stack)
   end
 
