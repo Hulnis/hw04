@@ -13,7 +13,7 @@ defmodule Calc do
   end
 
   @doc """
-  parse through input once paranths have been dealt with, turning into prefix list using turn_to_prefix
+  parse through input once paranths have been dealt with, turning into postfix list using turn_to_postfix
   """
   def parse_input(input) do
     post = input
@@ -35,17 +35,17 @@ defmodule Calc do
     IO.inspect(output)
     IO.puts("-----------")
     if next_elem == "(" do
-      turn_to_prefix(array, index + 1, op_stack ++ ["("], output)
+      turn_to_postfix(array, index + 1, op_stack ++ ["("], output)
     end
     if next_elem == ")" do
       result = match_paranths(op_stack, output)
-      turn_to_prefix(array, index + 1, elem(result, 0), elem(result, 1))
+      turn_to_postfix(array, index + 1, elem(result, 0), elem(result, 1))
     end
     if next_elem == "+" || next_elem == "-" || next_elem == "*" || next_elem == "/" do
       result = pop_ops(op_stack, output, next_elem)
-      turn_to_prefix(array, index + 1, elem(result, 0), elem(result, 1))
+      turn_to_postfix(array, index + 1, elem(result, 0), elem(result, 1))
     else
-      turn_to_prefix(array, index + 1, op_stack, output ++ [next_elem])
+      turn_to_postfix(array, index + 1, op_stack, output ++ [next_elem])
     end
   end
 
