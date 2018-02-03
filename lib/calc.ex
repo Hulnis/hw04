@@ -34,7 +34,7 @@ defmodule Calc do
       "-" -> num1 - num2
       "/" -> num1 / num2
       "*" -> num1 * num2
-      + -> "Error"
+      _ -> "Error"
     end
   end
 end
