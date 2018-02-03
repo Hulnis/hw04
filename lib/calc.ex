@@ -31,8 +31,8 @@ defmodule Calc do
   Does one math operation
   """
   def basic_math(num1, num2, op) do
-    IO.puts(num1)
-    IO.puts(num2)
+    IO.inspect(num1)
+    IO.inspect(num2)
     case op do
       "+" -> num1 + num2
       "-" -> num1 - num2
