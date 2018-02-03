@@ -32,10 +32,10 @@ defmodule Calc do
   def loop_over_array(array, index, stack) when index + 1 < Kernel.length(array) do
     op = Enum.at(array, index + 1)
     case op do
-      "+" -> stack ++ ["+", elem(Float.parse(Enum.at(array, index)), 0)]
-      "-" -> stack ++ ["-", elem(Float.parse(Enum.at(array, index)), 0)]
-      "/" -> stack ++ ["*", elem(Float.parse(Enum.at(array, index + 1)), 0), elem(Float.parse(Enum.at(array, index + 2)), 0)]
-      "*" -> stack ++ ["/", elem(Float.parse(Enum.at(array, index + 1)), 0), elem(Float.parse(Enum.at(array, index + 2)), 0)]
+      "+" -> stack = stack ++ ["+", elem(Float.parse(Enum.at(array, index)), 0)]
+      "-" -> stack = stack ++ ["-", elem(Float.parse(Enum.at(array, index)), 0)]
+      "/" -> stack = stack ++ ["*", elem(Float.parse(Enum.at(array, index + 1)), 0), elem(Float.parse(Enum.at(array, index + 2)), 0)]
+      "*" -> stack = stack ++ ["/", elem(Float.parse(Enum.at(array, index + 1)), 0), elem(Float.parse(Enum.at(array, index + 2)), 0)]
       _ -> "Error"
     end
     loop_over_array(array, index + 2, stack)
