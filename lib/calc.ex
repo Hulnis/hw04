@@ -39,6 +39,8 @@ defmodule Calc do
     end
     if next_elem == ")" do
       result = match_paranths(op_stack, output)
+      IO.puts("after )")
+      IO.inspect(result)
       turn_to_postfix(array, index + 1, elem(result, 0), elem(result, 1))
     end
     if next_elem == "+" || next_elem == "-" || next_elem == "*" || next_elem == "/" do
