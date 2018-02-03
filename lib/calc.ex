@@ -21,4 +21,8 @@ defmodule Calc do
     | String.split()
     | IO.puts()
   end
+
+  def print(basic) do
+    IO.puts("please help")
+  end
 end
