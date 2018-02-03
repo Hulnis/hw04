@@ -30,7 +30,7 @@ defmodule Calc do
   Loops over array, creating a ternary structure of op, left, and right
   1 + 2 * 3 + 4
   """
-  def turn_to_prefix(array, index, op_stack, num_stack) when index < Kernel.length(prefix_array) do
+  def turn_to_prefix(array, index, op_stack, num_stack) when index < Kernel.length(array) do
     next_elem = Enum.at(array, index)
     if next_elem == "(" do
       turn_to_prefix(array, index + 1, op_stack ++ ["("], num_stack)
@@ -50,7 +50,7 @@ defmodule Calc do
   Loops over array, creating a ternary structure of op, left, and right
   1 + 2 * 3 + 4
   """
-  def turn_to_prefix(array, index, op_stack, num_stack) when index >= Kernel.length(prefix_array) do
+  def turn_to_prefix(array, index, op_stack, num_stack) when index >= Kernel.length(array) do
     {op_stack, num_stack}
   end
 
