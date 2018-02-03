@@ -18,7 +18,7 @@ defmodule Calc do
   def parse_input(input) do
     post = input
     |> String.trim()
-    |> String.split()
+    |> String.split([" ", ""], include_captures: true)
     |> turn_to_postfix(0, [], [])
 
     IO.inspect(post)
@@ -45,7 +45,7 @@ defmodule Calc do
       next_elem == "+" || next_elem == "-" || next_elem == "*" || next_elem == "/" ->
         result = pop_ops(op_stack, output, next_elem)
         turn_to_postfix(array, index + 1, elem(result, 0), elem(result, 1))
-      true
+      true ->
         turn_to_postfix(array, index + 1, op_stack, output ++ [next_elem])
     end
   end
