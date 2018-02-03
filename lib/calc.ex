@@ -21,9 +21,7 @@ defmodule Calc do
     |> String.trim()
     |> String.split()
     |> turn_to_prefix(0, stack)
-    |> basic_eval()
-
-    IO.inspect(pre)
+    |> basic_eval(0)
   end
 
   @doc """
@@ -35,27 +33,39 @@ defmodule Calc do
     stack =
       case op do
         "+" -> stack ++ ["+", elem(Float.parse(Enum.at(array, index)), 0)]
-        "-" -> stack ++ ["-", elem(Float.parse(Enum.at(array, index)), 0)]
-        "*" -> stack ++ ["*", elem(Float.parse(Enum.at(array, index)), 0)]
-        "/" -> stack ++ ["/", elem(Float.parse(Enum.at(array, index)), 0)]
-        _ -> "Error in the case"
+        "-" -> stack ++ ["-", elem(Float.parse(Enum.at(array, index)), 0
+        "*" -> stack ++ ["*", elem(Float.parse(Enum.at(array, index)), 0), elem(Float.parse(Enum.at(array, index + 2)), 0)]
+        "/" -> stack ++ ["/", elem(Float.parse(Enum.at(array, index)), 0), elem(Float.parse(Enum.at(array, index + 2)), 0)]
+        _ -> "Error in the stack case"
       end
-    turn_to_prefix(array, index + 2, stack)
+    index =
+      case op do
+        "+" -> index + 2
+        "-" -> index + 2
+        "*" -> index + 3
+        "/" -> index + 3
+        _ -> "Error in the index case"
+      end
+    turn_to_prefix(array, index, stack)
   end
 
   def turn_to_prefix(array, index, stack) when index + 1 >= Kernel.length(array) do
-    IO.puts("end case")
-    IO.inspect(stack)
     stack ++ [elem(Float.parse(Enum.at(array, index)), 0)]
   end
 
   @doc """
   Will evaluate a basic arithmetic expression, no parantheses
   """
-  def basic_eval(prefix_array) do
+  def basic_eval(prefix_array, index) do
     IO.inspect(prefix_array)
-
-    
+    next_elem = Enum.at(array, index)
+    case next_elem do
+      "+" -> index + 2
+      "-" -> index + 2
+      "*" -> Enum.at(array, index + 1) * Enum.at(array, index + 2)
+      "/" -> Enum.at(array, index + 1) / Enum.at(array, index + 2)
+      _ -> "Error in the index case"
+    end
   end
 
 
