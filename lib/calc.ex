@@ -18,7 +18,7 @@ defmodule Calc do
   def parse_input(input) do
     post = input
     |> String.trim()
-    |> String.replace("(", "( "))
+    |> String.replace("(", "( ")
     |> String.replace(")", " )")
     |> String.split([" ", "(", ")"], trim: true)
     |> turn_to_postfix(0, [], [])
