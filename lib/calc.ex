@@ -57,19 +57,16 @@ defmodule Calc do
   @doc """
   pops elemnts from op_stack until we find close paranth
   """
-  def match_paranths(op_stack, num_stack) when List.last(op_stack) != "(" do
-    op = List.last(op_stack)
-    num2 = List.last(num_stack)
-    num1 = List.last(num_stack)
-    match_paranths(op_stack.delete(op), num_stack.delete(num2).delete(num1) ++ [op, num1, num2])
-  end
-
-  @doc """
-  pops elemnts from op_stack until we find close paranth base case
-  """
-  def match_paranths(op_stack, num_stack) when List.last(op_stack) == "(" do
-    op_stack = op_stack.delete(List.last(op_stack))
-    {op_stack, num_stack}
+  def match_paranths(op_stack, num_stack) do
+    if List.last(op_stack) != "(" do
+      op = List.last(op_stack)
+      num2 = List.last(num_stack)
+      num1 = List.last(num_stack)
+      match_paranths(op_stack.delete(op), num_stack.delete(num2).delete(num1) ++ [op, num1, num2])
+    else
+      op_stack = op_stack.delete(List.last(op_stack))
+      {op_stack, num_stack}
+    end
   end
 
   @doc """
