@@ -17,11 +17,11 @@ defmodule Calc do
   """
   def parse_input(input) do
     stack = []
-    pre = input
+    split_string = input
     |> String.trim()
     |> String.split()
-    |> ++ [")"]
-    |> turn_to_prefix(0, ["("], [])
+
+    pre = turn_to_prefix(split_string ++ [")"] ,0, ["("], [])
 
     IO.inspect(pre)
   end
