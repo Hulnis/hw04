@@ -62,7 +62,7 @@ defmodule Calc do
   Will evaluate a basic arithmetic expression for no elements
   """
   def turn_to_prefix(array, index, stack) when index == Kernel.length(array) do
-
+    stack
   end
 
   @doc """
