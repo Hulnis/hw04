@@ -65,7 +65,7 @@ defmodule Calc do
     if next_elem != "(" do
       match_paranths(List.delete(op_stack, next_elem), output ++ [next_elem])
     end
-      {op_stack, output}
+      {List.delete(op_stack, next_elem), output}
   end
 
   def pop_ops(op_stack, output, op) do
