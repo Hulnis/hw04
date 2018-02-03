@@ -41,7 +41,7 @@ defmodule Calc do
       result = match_paranths(op_stack, output)
       IO.puts("after )")
       IO.inspect(result)
-      # turn_to_postfix(array, index + 1, elem(result, 0), elem(result, 1))
+      turn_to_postfix(array, index + 1, elem(result, 0), elem(result, 1))
     end
     if next_elem == "+" || next_elem == "-" || next_elem == "*" || next_elem == "/" do
       result = pop_ops(op_stack, output, next_elem)
@@ -96,6 +96,8 @@ defmodule Calc do
   end
 
   def empty_stack(stack, output) when Kernel.length(stack) == 0 do
+    IO.puts("base case")
+    IO.inspect(output)
     output
   end
 end
