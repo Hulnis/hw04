@@ -85,7 +85,7 @@ defmodule Calc do
   end
 
   def empty_stack(stack, index, output) when index < Kernel.length(stack) do
-    next_elem = List.last(stack)
+    next_elem = Enum.at(stack, index)
     IO.puts("adding to output")
     IO.inspect(next_elem)
     empty_stack(stack, index + 1, output ++ [next_elem])
