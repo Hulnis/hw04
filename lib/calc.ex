@@ -58,12 +58,12 @@ defmodule Calc do
   """
   def basic_eval(prefix_array, index) do
     IO.inspect(prefix_array)
-    next_elem = Enum.at(array, index)
+    next_elem = Enum.at(prefix_array, index)
     case next_elem do
       "+" -> index + 2
       "-" -> index + 2
-      "*" -> Enum.at(array, index + 1) * Enum.at(array, index + 2)
-      "/" -> Enum.at(array, index + 1) / Enum.at(array, index + 2)
+      "*" -> Enum.at(prefix_array, index + 1) * Enum.at(prefix_array, index + 2)
+      "/" -> Enum.at(prefix_array, index + 1) / Enum.at(prefix_array, index + 2)
       _ -> "Error in the index case"
     end
   end
