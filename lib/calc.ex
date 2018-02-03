@@ -162,6 +162,8 @@ defmodule Calc do
     num2 = elem(Float.parse(num2), 0)
 
     num1 = List.last(stack)
+    IO.puts("num1")
+    IO.inspect(num1)
     stack = List.delete(stack, num1)
     num1 = elem(Float.parse(num1), 0)
     %{:num1 => num1, :num2 => num2, :stack => stack}
