@@ -107,29 +107,29 @@ defmodule Calc do
     next_elem = Enum.at(postfix, index)
     cond do
       next_elem == "+" ->
-        num2 = enum(Float.parse(List.last(stack)), 0)
+        num2 = eval(Float.parse(List.last(stack)), 0)
         stack = List.delete(stack, num2)
-        num1 = enum(Float.parse(List.last(stack)), 1)
+        num1 = eval(Float.parse(List.last(stack)), 1)
         stack = List.delete(stack, num1)
         IO.puts("Num 1 and 2")
         IO.inspect(num1, num2)
         eval_postfix(postfix, stack ++ [num1 + num2], index + 1)
       next_elem == "-" ->
-        num2 = List.last(stack)
+        num2 = eval(Float.parse(List.last(stack)), 0)
         stack = List.delete(stack, num2)
-        num1 = List.last(stack)
+        num1 = eval(Float.parse(List.last(stack)), 1)
         stack = List.delete(stack, num1)
         eval_postfix(postfix, stack ++ [num1 - num2], index + 1)
       next_elem == "*" ->
-        num2 = List.last(stack)
+        num2 = eval(Float.parse(List.last(stack)), 0)
         stack = List.delete(stack, num2)
-        num1 = List.last(stack)
+        num1 = eval(Float.parse(List.last(stack)), 1)
         stack = List.delete(stack, num1)
         eval_postfix(postfix, stack ++ [num1 * num2], index + 1)
       next_elem == "/" ->
-        num2 = List.last(stack)
+        num2 = eval(Float.parse(List.last(stack)), 0)
         stack = List.delete(stack, num2)
-        num1 = List.last(stack)
+        num1 = eval(Float.parse(List.last(stack)), 1)
         stack = List.delete(stack, num1)
         eval_postfix(postfix, stack ++ [num1 / num2], index + 1)
       true ->
