@@ -107,7 +107,10 @@ defmodule Calc do
     next_elem = Enum.at(postfix, index)
     cond do
       next_elem == "+" ->
-        {num1, num2} = get_two_elem(stack)
+        result = get_two_elem(stack)
+        num1 = result[num2]
+        num2 = result[num2]
+        stack = result[stack]
         IO.puts("Num 1 and 2")
         IO.inspect(num1)
         IO.inspect(num2)
@@ -155,6 +158,6 @@ defmodule Calc do
     num1 = List.last(stack)
     stack = List.delete(stack, num1)
     num1 = elem(Float.parse(num1, 0))
-    {num1, num2, stack}
+    %{:num1 => num1, :num2 => num2, :stack => stack}
   end
 end
