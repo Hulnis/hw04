@@ -21,8 +21,8 @@ defmodule Calc do
     |> String.split()
 
     IO.inspect(array, label: "List is: ")
-    num1 = Float.parse(Enum.at(array, 0))
-    num2 = Float.parse(Enum.at(array, 2))
+    num1 = String.to_float(Enum.at(array, 0))
+    num2 = String.to_float(Enum.at(array, 2))
     op = Enum.at(array, 1)
     IO.puts(basic_math(num1, num2, op))
   end
