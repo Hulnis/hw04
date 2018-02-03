@@ -27,7 +27,7 @@ defmodule Calc do
   """
   def basic_math(args) do
     num1 = Integer.parse(Enum.at(args, 0))
-    op = Integer.parse(Enum.at(args, 1))
+    op = Enum.at(args, 1)
     num2 = Integer.parse(Enum.at(args, 2))
     case op do
       "+" -> num1 + num2
