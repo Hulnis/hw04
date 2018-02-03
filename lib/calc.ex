@@ -35,6 +35,7 @@ defmodule Calc do
     IO.puts(op)
     IO.inspect(index)
     IO.inspect(Kernel.length(array))
+    IO.inspect(stack)
     stack =
       case op do
         "+" -> stack ++ ["+", elem(Float.parse(Enum.at(array, index)), 0)]
