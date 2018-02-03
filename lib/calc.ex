@@ -70,7 +70,7 @@ defmodule Calc do
       List.delete(num_stack, num1)
       match_paranths(List.delete(op_stack, op), num_stack ++ [op, num1, num2])
     else
-      op_stack = op_stack.delete(List.last(op_stack))
+      op_stack = List.delete(op_stack, List.last(op_stack))
       {op_stack, num_stack}
     end
   end
