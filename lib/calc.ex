@@ -22,6 +22,8 @@ defmodule Calc do
     |> String.split()
     |> turn_to_prefix(0, stack)
     |> basic_eval(0)
+
+    IO.inspect(pre)
   end
 
   @doc """
@@ -49,8 +51,18 @@ defmodule Calc do
     turn_to_prefix(array, index, stack)
   end
 
-  def turn_to_prefix(array, index, stack) when index + 1 >= Kernel.length(array) do
+  @doc """
+  Will evaluate a basic arithmetic expression for the final element
+  """
+  def turn_to_prefix(array, index, stack) when index + 1 == Kernel.length(array) do
     stack ++ [elem(Float.parse(Enum.at(array, index)), 0)]
+  end
+
+  @doc """
+  Will evaluate a basic arithmetic expression for no elements
+  """
+  def turn_to_prefix(array, index, stack) when index == Kernel.length(array) do
+
   end
 
   @doc """
