@@ -54,6 +54,9 @@ defmodule Calc do
   1 + 2 * 3 + 4
   """
   def turn_to_postfix(array, index, op_stack, output) when index >= Kernel.length(array) do
+    IO.puts("emptying stack")
+    IO.inspect(op_stack)
+    IO.inspect(output)
     empty_stack(op_stack, 0, output)
   end
 
@@ -66,10 +69,6 @@ defmodule Calc do
   end
 
   def pop_ops(op_stack, output, op) do
-    IO.puts("in pop ops")
-    IO.inspect(op_stack)
-    IO.inspect(output)
-    IO.puts("<<<<<<<<<<<<<<<")
     if Kernel.length(op_stack) > 0 do
       if op == "*" || op == "/" do
         {op_stack ++ [op], output}
