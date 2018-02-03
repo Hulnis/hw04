@@ -20,8 +20,8 @@ defmodule Calc do
     pre = input
     |> String.trim()
     |> String.split()
-    |> turn_to_prefix(0, stack)
-    |> mult_and_div(0, [])
+    |> ++ [")"]
+    |> turn_to_prefix(0, ["("], [])
 
     IO.inspect(pre)
   end
@@ -30,77 +30,67 @@ defmodule Calc do
   Loops over array, creating a ternary structure of op, left, and right
   1 + 2 * 3 + 4
   """
-  def turn_to_prefix(array, index, stack) when index + 1 < Kernel.length(array) do
-    op = Enum.at(array, index + 1)
-    stack =
-      case op do
-        "+" -> stack ++ ["+", elem(Float.parse(Enum.at(array, index)), 0)]
-        "-" -> stack ++ ["-", elem(Float.parse(Enum.at(array, index)), 0)]
-        "*" -> stack ++ ["*", elem(Float.parse(Enum.at(array, index)), 0), elem(Float.parse(Enum.at(array, index + 2)), 0)]
-        "/" -> stack ++ ["/", elem(Float.parse(Enum.at(array, index)), 0), elem(Float.parse(Enum.at(array, index + 2)), 0)]
-        _ -> "Error in the stack case"
-      end
-    index =
-      case op do
-        "+" -> index + 2
-        "-" -> index + 2
-        "*" -> index + 3
-        "/" -> index + 3
-        _ -> "Error in the index case"
-      end
-    turn_to_prefix(array, index, stack)
+  def turn_to_prefix(array, index, op_stack, num_stack) when index < Kernel.length(prefix_array) do
+    next_elem = Enum.at(array, index)
+    if next_elem == "(" do
+      turn_to_prefix(array, index + 1, op_stack ++ ["("], num_stack)
+    end
+    if next_elem == ")" do
+      result = match_paranths(op_stack, num_stack)
+      turn_to_prefix(array, index + 1, elem(result, 0), elem(result, 1))
+    end
+    if next_elem == "+" || next_elem == "-" || next_elem == "*" || next_elem == "/" do
+      result = pop_ops(op_stack, num_stac, op)
+    else
+      turn_to_prefix(array, index + 1, num_stack ++ [next_elem], op_stack)
+    end
   end
 
   @doc """
-  Will evaluate a basic arithmetic expression for the final element
+  Loops over array, creating a ternary structure of op, left, and right
+  1 + 2 * 3 + 4
   """
-  def turn_to_prefix(array, index, stack) when index + 1 == Kernel.length(array) do
-    stack ++ [elem(Float.parse(Enum.at(array, index)), 0)]
+  def turn_to_prefix(array, index, op_stack, num_stack) when index >= Kernel.length(prefix_array) do
+    {op_stack, num_stack}
   end
 
   @doc """
-  Will evaluate a basic arithmetic expression for no elements
+  pops elemnts from op_stack until we find close paranth
   """
-  def turn_to_prefix(array, index, stack) when index == Kernel.length(array) do
-    stack
+  def match_paranths(op_stack, num_stack) when List.last(op_stack) != "(" do
+    op = List.last(op_stack)
+    num2 = List.last(num_stack)
+    num1 = List.last(num_stack)
+    match_paranths(op_stack.delete(op), num_stack.delete(num2).delete(num1) ++ [op, num1, num2])
   end
 
   @doc """
-  Will evaluate a basic arithmetic expression, calculating all * and / expressions
+  pops elemnts from op_stack until we find close paranth base case
   """
-  def mult_and_div(prefix_array, index, stack) when index + 1 < Kernel.length(prefix_array) do
-    IO.inspect(prefix_array)
-    next_elem = Enum.at(prefix_array, index)
-    stack =
-      case next_elem do
-        "+" -> stack ++ ["+"]
-        "-" -> index ++ ["-"]
-        "*" -> stack ++ [Enum.at(prefix_array, index + 1) * Enum.at(prefix_array, index + 2)]
-        "/" -> stack ++ [Enum.at(prefix_array, index + 1) / Enum.at(prefix_array, index + 2)]
-        _ -> stack ++ [next_elem]
-      end
-    index =
-      case next_elem do
-        "+" -> index + 1
-        "-" -> index + 1
-        "*" -> index + 3
-        "/" -> index + 3
-        _ -> index + 1
-      end
-    mult_and_div(prefix_array, index, stack)
+  def match_paranths(op_stack, num_stack) when List.last(op_stack) == "(" do
+    op_stack = op_stack.delete(List.last(op_stack))
+    {op_stack, num_stack}
   end
 
   @doc """
-  Will evaluate a basic arithmetic expression, calculating all * and / expressions for the final element
+  Pops elements until finds an operator that comes after
   """
-  def mult_and_div(prefix_array, index, stack) when index + 1 == Kernel.length(prefix_array) do
-    stack ++ [elem(Float.parse(Enum.at(prefix_array, index)), 0)]
-  end
+  def pop_ops(op_stack, num_stack, op) when Kernel.length(op_stack) >= 0 do
+    next_op = List.last(op_stack)
 
+    if next_op == "*" || next_op == "/" do
+      num2 = List.last(num_stack)
+      num1 = List.last(num_stack)
+      pop_ops(op_stack.delete(next_op), num_stack.delete(num2).delete(num1) ++ [op, num1, num2])
+    else
+      {op_stack ++ [next_op], num_stack}
+    end
+  end
   @doc """
-  Will evaluate a basic arithmetic expression, calculating all * and / expressions for no elements
+  Pops elements until finds an operator that comes after base case of empty stack
   """
-  def mult_and_div(prefix_array, index, stack) when index == Kernel.length(prefix_array) do
-    stack
+  def match_paranths(op_stack, num_stack) when Kernel.length(op_stack) == 0 do
+    op_stack = op_stack.delete(List.last(op_stack))
+    {op_stack, num_stack}
   end
 end
