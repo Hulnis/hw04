@@ -40,7 +40,7 @@ defmodule Calc do
       turn_to_prefix(array, index + 1, elem(result, 0), elem(result, 1))
     end
     if next_elem == "+" || next_elem == "-" || next_elem == "*" || next_elem == "/" do
-      result = pop_ops(op_stack, num_stac, op)
+      result = pop_ops(op_stack, num_stac, next_elem)
     else
       turn_to_prefix(array, index + 1, num_stack ++ [next_elem], op_stack)
     end
