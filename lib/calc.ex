@@ -66,7 +66,7 @@ defmodule Calc do
       op = List.last(op_stack)
       num2 = List.last(num_stack)
       num1 = List.last(num_stack)
-      match_paranths(op_stack.delete(op), num_stack.delete(num2).delete(num1) ++ [op, num1, num2])
+      match_paranths(op_stack.delete(op), List.delete(List.delete(num_stack, num2), num1) ++ [op, num1, num2])
     else
       op_stack = op_stack.delete(List.last(op_stack))
       {op_stack, num_stack}
