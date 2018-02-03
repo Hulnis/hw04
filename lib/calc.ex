@@ -16,7 +16,6 @@ defmodule Calc do
   parse through input once paranths have been dealt with, turning into prefix list using turn_to_prefix
   """
   def parse_input(input) do
-    stack = []
     split_string = input
     |> String.trim()
     |> String.split()
@@ -41,6 +40,7 @@ defmodule Calc do
     end
     if next_elem == "+" || next_elem == "-" || next_elem == "*" || next_elem == "/" do
       result = pop_ops(op_stack, num_stack, next_elem)
+      turn_to_prefix(array, index + 1, elem(result, 0), elem(result, 1))
     else
       turn_to_prefix(array, index + 1, num_stack ++ [next_elem], op_stack)
     end
@@ -86,7 +86,7 @@ defmodule Calc do
   @doc """
   Pops elements until finds an operator that comes after base case of empty stack
   """
-  def match_paranths(op_stack, num_stack) when Kernel.length(op_stack) == 0 do
+  def pop_ops(op_stack, num_stack) when Kernel.length(op_stack) == 0 do
     op_stack = op_stack.delete(List.last(op_stack))
     {op_stack, num_stack}
   end
