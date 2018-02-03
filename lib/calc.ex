@@ -86,7 +86,9 @@ defmodule Calc do
 
   def empty_stack(stack, index, output) when index < Kernel.length(stack) do
     next_elem = List.last(stack)
-    empty_stack(List.delete(stack, next_elem), index + 1, output ++ [next_elem])
+    IO.puts("adding to output")
+    IO.inspect(next_elem)
+    empty_stack(stack, index + 1, output ++ [next_elem])
   end
 
   def empty_stack(stack, index, output) when index >= Kernel.length(stack) do
