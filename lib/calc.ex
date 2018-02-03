@@ -108,36 +108,27 @@ defmodule Calc do
     cond do
       next_elem == "+" ->
         result = get_two_elem(stack)
-        num1 = result[:num2]
+        num1 = result[:num1]
         num2 = result[:num2]
         stack = result[:stack]
-        IO.puts("Num 1 and 2")
-        IO.inspect(num1)
-        IO.inspect(num2)
         eval_postfix(postfix, stack ++ [num1 + num2], index + 1)
       next_elem == "-" ->
-        num2 = List.last(stack)
-        stack = List.delete(stack, num2)
-        num2 = elem(Float.parse(num2), 0)
-        num1 = List.last(stack)
-        stack = List.delete(stack, num1)
-        num1 = elem(Float.parse(num1), 0)
+        result = get_two_elem(stack)
+        num1 = result[:num1]
+        num2 = result[:num2]
+        stack = result[:stack]
         eval_postfix(postfix, stack ++ [num1 - num2], index + 1)
       next_elem == "*" ->
-        num2 = List.last(stack)
-        stack = List.delete(stack, num2)
-        num2 = elem(Float.parse(num2), 0)
-        num1 = List.last(stack)
-        stack = List.delete(stack, num1)
-        num1 = elem(Float.parse(num1), 0)
+        result = get_two_elem(stack)
+        num1 = result[:num1]
+        num2 = result[:num2]
+        stack = result[:stack]
         eval_postfix(postfix, stack ++ [num1 * num2], index + 1)
       next_elem == "/" ->
-        num2 = List.last(stack)
-        stack = List.delete(stack, num2)
-        num2 = elem(Float.parse(num2), 0)
-        num1 = List.last(stack)
-        stack = List.delete(stack, num1)
-        num1 = elem(Float.parse(num1), 0)
+        result = get_two_elem(stack)
+        num1 = result[:num1]
+        num2 = result[:num2]
+        stack = result[:stack]
         eval_postfix(postfix, stack ++ [num1 / num2], index + 1)
       true ->
         IO.puts("adding to stack")
@@ -152,18 +143,10 @@ defmodule Calc do
   end
 
   def get_two_elem(stack) do
-    IO.puts("get two")
-    IO.inspect(stack)
     num2 = List.last(stack)
-    IO.puts("num2")
-    IO.inspect(num2)
     stack = List.delete(stack, num2)
-    IO.inspect(stack)
     num2 = elem(Float.parse(num2), 0)
-
     num1 = List.last(stack)
-    IO.puts("num1")
-    IO.inspect(num1)
     stack = List.delete(stack, num1)
     num1 = elem(Float.parse(num1), 0)
     %{:num1 => num1, :num2 => num2, :stack => stack}
