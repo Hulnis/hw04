@@ -20,7 +20,7 @@ defmodule Calc do
     |> String.trim()
     |> String.split()
 
-    IO.inspect(array, "List is: ")
+    IO.inspect(array, label: "List is: ")
   end
 
   @doc """
