@@ -107,9 +107,9 @@ defmodule Calc do
     next_elem = Enum.at(postfix, index)
     cond do
       next_elem == "+" ->
-        num2 = Float.parse(List.last(stack))
+        num2 = enum(Float.parse(List.last(stack)), 0)
         stack = List.delete(stack, num2)
-        num1 = Float.parse(List.last(stack))
+        num1 = enum(Float.parse(List.last(stack)), 1)
         stack = List.delete(stack, num1)
         IO.puts("Num 1 and 2")
         IO.inspect(num1, num2)
