@@ -74,6 +74,8 @@ defmodule Calc do
       IO.inspect(op)
       match_paranths(List.delete(op_stack, op), num_stack ++ [op, num1, num2])
     else
+      IO.puts("in else")
+      IO.inspect(num_stack)
       op_stack = List.delete(op_stack, List.last(op_stack))
       {op_stack, num_stack}
     end
