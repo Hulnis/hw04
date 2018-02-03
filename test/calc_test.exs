@@ -19,4 +19,14 @@ defmodule CalcTest do
     assert Calc.turn_to_postfix(["1", "+", "2", "*", "3"], 0, [], []) == [1, 2, 3, "*", "+"]
     assert Calc.turn_to_postfix(["(", "1", "+", "2", ")", "*", "3"], 0, [], []) == [1, 2, "+", 3, "*"]
   end
+
+  test "eval postfix" do
+    assert Calc.eval_postfix([1, 2, "+"], [], 0) == 3
+    assert Calc.eval_postfix([1, 2, "-"], [], 0) == -1
+    assert Calc.eval_postfix([1, 2, "/"], [], 0) == 2
+    assert Calc.eval_postfix([1, 2, "*"], [], 0) == 0.5
+    assert Calc.eval_postfix([1, 2, 3, "*", "+"], [], 0) == 7
+    assert Calc.eval_postfix([1, 2, "+", 3, "*"], [], 0) == 9
+
+  end
 end
