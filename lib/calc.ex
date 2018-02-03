@@ -33,17 +33,11 @@ defmodule Calc do
   """
   def turn_to_postfix(array, index, op_stack, output) when index < Kernel.length(array) do
     next_elem = Enum.at(array, index)
-    IO.inspect(next_elem)
-    IO.inspect(op_stack)
-    IO.inspect(output)
-    IO.puts("-----------")
     cond do
       next_elem == "(" ->
         turn_to_postfix(array, index + 1, op_stack ++ ["("], output)
       next_elem == ")" ->
         result = match_paranths(op_stack, output)
-        IO.puts("after )")
-        IO.inspect(result)
         turn_to_postfix(array, index + 1, elem(result, 0), elem(result, 1))
       next_elem == "+" || next_elem == "-" || next_elem == "*" || next_elem == "/" ->
         result = pop_ops(op_stack, output, next_elem)
@@ -58,9 +52,6 @@ defmodule Calc do
   1 + 2 * 3 + 4
   """
   def turn_to_postfix(array, index, op_stack, output) when index >= Kernel.length(array) do
-    IO.puts("emptying stack")
-    IO.inspect(op_stack)
-    IO.inspect(output)
     empty_stack(op_stack, output)
   end
 
@@ -69,7 +60,6 @@ defmodule Calc do
     if next_elem != "(" do
       match_paranths(List.delete(op_stack, next_elem), output ++ [next_elem])
     else
-      IO.puts("leaving match")
       {List.delete(op_stack, next_elem), output}
     end
   end
@@ -92,14 +82,10 @@ defmodule Calc do
 
   def empty_stack(stack, output) when Kernel.length(stack) > 0 do
     next_elem = List.last(stack)
-    IO.puts("adding to output")
-    IO.inspect(next_elem)
     empty_stack(List.delete(stack, next_elem), output ++ [next_elem])
   end
 
   def empty_stack(stack, output) when Kernel.length(stack) == 0 do
-    IO.puts("base case")
-    IO.inspect(output)
     output
   end
 
@@ -131,9 +117,6 @@ defmodule Calc do
         stack = result[:stack]
         eval_postfix(postfix, stack ++ [num1 / num2], index + 1)
       true ->
-        IO.puts("adding to stack")
-        IO.inspect(next_elem)
-        IO.puts("------")
         eval_postfix(postfix, stack ++ [next_elem], index + 1)
     end
   end
