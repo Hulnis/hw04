@@ -37,13 +37,13 @@ defmodule Calc do
     if next_elem == "(" do
       turn_to_postfix(array, index + 1, op_stack ++ ["("], output)
     end
-    if next_elem == ")" do
+    else if next_elem == ")" do
       result = match_paranths(op_stack, output)
       IO.puts("after )")
       IO.inspect(result)
       turn_to_postfix(array, index + 1, elem(result, 0), elem(result, 1))
     end
-    if next_elem == "+" || next_elem == "-" || next_elem == "*" || next_elem == "/" do
+    else if next_elem == "+" || next_elem == "-" || next_elem == "*" || next_elem == "/" do
       result = pop_ops(op_stack, output, next_elem)
       turn_to_postfix(array, index + 1, elem(result, 0), elem(result, 1))
     else
