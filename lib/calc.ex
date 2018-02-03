@@ -26,9 +26,9 @@ defmodule Calc do
   Does one math operation
   """
   def basic_math(args) do
-    num1 = Enum.at(args, 0)
-    op = Enum.at(args, 1)
-    num2 = Enum.at(args, 2)
+    num1 = Integer.parse(Enum.at(args, 0))
+    op = Integer.parse(Enum.at(args, 1))
+    num2 = Integer.parse(Enum.at(args, 2))
     Io.puts(num1)
     Io.puts(op)
     Io.puts(num2)
