@@ -33,7 +33,7 @@ defmodule Calc do
     stack =
       case op do
         "+" -> stack ++ ["+", elem(Float.parse(Enum.at(array, index)), 0)]
-        "-" -> stack ++ ["-", elem(Float.parse(Enum.at(array, index)), 0
+        "-" -> stack ++ ["-", elem(Float.parse(Enum.at(array, index)), 0)]
         "*" -> stack ++ ["*", elem(Float.parse(Enum.at(array, index)), 0), elem(Float.parse(Enum.at(array, index + 2)), 0)]
         "/" -> stack ++ ["/", elem(Float.parse(Enum.at(array, index)), 0), elem(Float.parse(Enum.at(array, index + 2)), 0)]
         _ -> "Error in the stack case"
