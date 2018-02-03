@@ -29,6 +29,9 @@ defmodule Calc do
     num1 = Integer.parse(Enum.at(args, 0))
     op = Enum.at(args, 1)
     num2 = Integer.parse(Enum.at(args, 2))
+    IO.puts(num1)
+    IO.puts(op)
+    IO.puts(num2)
     case op do
       "+" -> num1 + num2
       "-" -> num1 - num2
