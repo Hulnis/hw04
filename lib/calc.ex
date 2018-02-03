@@ -21,7 +21,7 @@ defmodule Calc do
     |> String.trim()
     |> String.split()
     |> turn_to_prefix(0, stack)
-    |> mult_and_div(0)
+    |> mult_and_div(0, [])
 
     IO.inspect(pre)
   end
