@@ -16,22 +16,17 @@ defmodule Calc do
   Will evaluate a basic arithmetic expression, no parantheses
   """
   def basic_eval(line) do
-    line
+    array = line
     |> String.trim()
     |> String.split()
-    |> basic_math()
+
+    IO.inspect(array, "List is: ")
   end
 
   @doc """
   Does one math operation
   """
-  def basic_math(args) do
-    num1 = Integer.parse(Enum.at(args, 0))
-    op = Enum.at(args, 1)
-    num2 = Integer.parse(Enum.at(args, 2))
-    IO.puts(num1)
-    IO.puts(op)
-    IO.puts(num2)
+  def basic_math(num1, num2, op) do
     case op do
       "+" -> num1 + num2
       "-" -> num1 - num2
