@@ -66,6 +66,10 @@ defmodule Calc do
   end
 
   def pop_ops(op_stack, output, op) do
+    IO.puts("in pop ops")
+    IO.inspect(op_stack)
+    IO.inspect(output)
+    IO.puts("<<<<<<<<<<<<<<<")
     if Kernel.length(op_stack) >= 0 do
       if op == "*" || op == "/" do
         {op_stack ++ [op], output}
