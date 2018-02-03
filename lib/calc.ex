@@ -109,7 +109,7 @@ defmodule Calc do
       next_elem == "+" ->
         num2 = elem(Float.parse(List.last(stack)), 0)
         stack = List.delete(stack, num2)
-        num1 = elem(Float.parse(List.last(stack)), 1)
+        num1 = elem(Float.parse(List.last(stack)), 0)
         stack = List.delete(stack, num1)
         IO.puts("Num 1 and 2")
         IO.inspect(num1)
@@ -118,19 +118,19 @@ defmodule Calc do
       next_elem == "-" ->
         num2 = elem(Float.parse(List.last(stack)), 0)
         stack = List.delete(stack, num2)
-        num1 = elem(Float.parse(List.last(stack)), 1)
+        num1 = elem(Float.parse(List.last(stack)), 0)
         stack = List.delete(stack, num1)
         eval_postfix(postfix, stack ++ [num1 - num2], index + 1)
       next_elem == "*" ->
         num2 = elem(Float.parse(List.last(stack)), 0)
         stack = List.delete(stack, num2)
-        num1 = elem(Float.parse(List.last(stack)), 1)
+        num1 = elem(Float.parse(List.last(stack)), 0)
         stack = List.delete(stack, num1)
         eval_postfix(postfix, stack ++ [num1 * num2], index + 1)
       next_elem == "/" ->
         num2 = elem(Float.parse(List.last(stack)), 0)
         stack = List.delete(stack, num2)
-        num1 = elem(Float.parse(List.last(stack)), 1)
+        num1 = elem(Float.parse(List.last(stack)), 0)
         stack = List.delete(stack, num1)
         eval_postfix(postfix, stack ++ [num1 / num2], index + 1)
       true ->
