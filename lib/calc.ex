@@ -8,14 +8,14 @@ defmodule Calc do
   """
   def main do
     input = IO.gets("Input your expression to be evaluated: ")
-    parse_input(input)
+    eval_expr(input)
     main()
   end
 
   @doc """
   parse through input once paranths have been dealt with, turning into postfix list using turn_to_postfix
   """
-  def parse_input(input) do
+  def eval_expr(input) do
     post = input
     |> String.trim()
     |> String.replace("(", " ( ")
