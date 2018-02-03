@@ -20,7 +20,7 @@ defmodule Calc do
     |> String.trim()
     |> String.replace("(", " ( ")
     |> String.replace(")", " ) ")
-    |> String.split([" ", "(", ")"], trim: true)
+    |> String.split(" ")
     |> turn_to_postfix(0, [], [])
 
     IO.inspect(post)
