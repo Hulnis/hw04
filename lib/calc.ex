@@ -8,32 +8,41 @@ defmodule Calc do
   """
   def main do
     input = IO.gets("Input your expression to be evaluated: ")
-    IO.puts(parse_input(input))
+    parse_input(input)
     main()
   end
 
   @doc """
-  parse through input once paranths have been dealt with, turning into ast using loop_over_array
+  parse through input once paranths have been dealt with, turning into prefix list using loop_over_array
   """
   def parse_input(input) do
-    ast = input
+    stack = []
+    pre = input
     |> String.trim()
     |> String.split()
-    |> loop_over_array(0)
+    |> loop_over_array(0, stack)
 
-    IO.inspect(ast)
+    IO.inspect(pre)
   end
 
   @doc """
   Loops over array, creating a ternary structure of op, left, and right
-  1 + 2 + 3 + 4
+  1 + 2 * 3 +4
   """
-  def loop_over_array(array, index) when index + 1 < Kernel.length(array) do
-    %{"op" => Enum.at(array, index + 1), "left" => elem(Float.parse(Enum.at(array, index)), 0), "right" => loop_over_array(array, index + 2)}
+  def loop_over_array(array, index, stack) when index + 1 < Kernel.length(array) do
+    op = Enum.at(array, index + 1)
+    case op do
+      "+" -> stack ++ ["+", elem(Float.parse(Enum.at(array, index)), 0)]
+      "-" -> stack ++ ["-", elem(Float.parse(Enum.at(array, index)), 0)]
+      "/" -> stack ++ ["*", elem(Float.parse(Enum.at(array, index + 1)), 0), elem(Float.parse(Enum.at(array, index + 2)), 0)]
+      "*" -> stack ++ ["/", elem(Float.parse(Enum.at(array, index + 1)), 0), elem(Float.parse(Enum.at(array, index + 2)), 0)]
+      _ -> "Error"
+
+    loop_over_array(array, index + 2, stack)
   end
 
-  def loop_over_array(array, index) when index + 1 == Kernel.length(array) do
-    elem(Float.parse(Enum.at(array, index)), 0)
+  def loop_over_array(array, index, stack) when index + 1 == Kernel.length(array) do
+    stack ++ [elem(Float.parse(Enum.at(array, index)), 0)]
   end
 
   @doc """
