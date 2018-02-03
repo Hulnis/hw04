@@ -77,7 +77,7 @@ defmodule Calc do
         {op_stack ++ [next_elem], output}
       end
     else
-      {op_stack ++ [op], output]}
+      {op_stack ++ [op], output}
     end
   end
 
