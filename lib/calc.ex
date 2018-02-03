@@ -115,7 +115,7 @@ defmodule Calc do
       next_elem == "-" ->
         num2 = List.last(stack)
         stack = List.delete(stack, num2)
-        num2 = elem(Float.parse(num2, 0)
+        num2 = elem(Float.parse(num2, 0))
         num1 = List.last(stack)
         stack = List.delete(stack, num1)
         num1 = elem(Float.parse(num1, 0))
@@ -123,7 +123,7 @@ defmodule Calc do
       next_elem == "*" ->
         num2 = List.last(stack)
         stack = List.delete(stack, num2)
-        num2 = elem(Float.parse(num2, 0)
+        num2 = elem(Float.parse(num2, 0))
         num1 = List.last(stack)
         stack = List.delete(stack, num1)
         num1 = elem(Float.parse(num1, 0))
@@ -131,7 +131,7 @@ defmodule Calc do
       next_elem == "/" ->
         num2 = List.last(stack)
         stack = List.delete(stack, num2)
-        num2 = elem(Float.parse(num2, 0)
+        num2 = elem(Float.parse(num2, 0))
         num1 = List.last(stack)
         stack = List.delete(stack, num1)
         num1 = elem(Float.parse(num1, 0))
@@ -151,7 +151,7 @@ defmodule Calc do
   def get_two_elem(stack) do
     num2 = List.last(stack)
     stack = List.delete(stack, num2)
-    num2 = elem(Float.parse(num2, 0)
+    num2 = elem(Float.parse(num2, 0))
     num1 = List.last(stack)
     stack = List.delete(stack, num1)
     num1 = elem(Float.parse(num1, 0))
