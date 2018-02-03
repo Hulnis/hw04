@@ -62,16 +62,15 @@ defmodule Calc do
   pops elemnts from op_stack until we find close paranth
   """
   def match_paranths(op_stack, num_stack) do
+    IO.puts("adding at end")
+    IO.inspect(num_stack)
+    IO.inspect(op_stack)
     if List.last(op_stack) != "(" do
       op = List.last(op_stack)
       num2 = List.last(num_stack)
       num_stack = List.delete(num_stack, num2)
       num1 = List.last(num_stack)
       num_stack = List.delete(num_stack, num1)
-
-      IO.puts("adding at end")
-      IO.inspect(num_stack)
-      IO.inspect(op)
       match_paranths(List.delete(op_stack, op), num_stack ++ [op, num1, num2])
     else
       IO.puts("in else")
